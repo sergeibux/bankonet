@@ -12,5 +12,11 @@ public class CompteCourant {
 		++ CompteCourant.nbCompteCourant;
 	}
 	
+	public void creditAccount(double amount) {
+		this.solde += amount;
+	}
 	
+	public void debitAccount(double amount) {
+		this.solde -= amount;
+	}
 }
