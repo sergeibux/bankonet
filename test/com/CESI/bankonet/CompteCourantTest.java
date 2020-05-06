@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 class CompteCourantTest {
 
 	@Test
-	void test() {
+	void testCpt1() {
+		int nbCpt = CompteCourant.nbCompteCourant;
 		CompteCourant compteCourant1 = new CompteCourant();
 		
 		compteCourant1.nom = "Moi";
@@ -21,14 +22,12 @@ class CompteCourantTest {
 		assertEquals("424 42854 254", compteCourant1.numero);
 		assertEquals(120.22f, compteCourant1.solde);
 		assertEquals(150.0f, compteCourant1.montantDecouvertAutorise);
-		assertEquals(1, CompteCourant.nbCompteCourant);
+		assertEquals(nbCpt + 1, CompteCourant.nbCompteCourant);
+	}
 		
-		double soldeAnterieur = compteCourant1.solde;
-		compteCourant1.creditAccount(2.0f);
-		assertEquals((soldeAnterieur + 2.0f), compteCourant1.solde);
-		compteCourant1.debitAccount(12.0f);
-		assertEquals((soldeAnterieur + 2.0f - 12.0f), compteCourant1.solde);
-
+	@Test
+	void testCpt2() {
+		int nbCpt = CompteCourant.nbCompteCourant;
 		CompteCourant compteCourant2 = new CompteCourant();
 		
 		compteCourant2.nom = "Toi";
@@ -42,14 +41,12 @@ class CompteCourantTest {
 		assertEquals("549 241542 57", compteCourant2.numero);
 		assertEquals(20120.59f, compteCourant2.solde);
 		assertEquals(0.0f, compteCourant2.montantDecouvertAutorise);
-		assertEquals(2, CompteCourant.nbCompteCourant);
+		assertEquals(nbCpt + 1, CompteCourant.nbCompteCourant);
+	}
 
-		soldeAnterieur = compteCourant2.solde;
-		compteCourant2.creditAccount(5.0f);
-		assertEquals((soldeAnterieur + 5.0f), compteCourant2.solde);
-		compteCourant2.debitAccount(15.0f);
-		assertEquals((soldeAnterieur + 5.0f - 15.0f), compteCourant2.solde);
-
+	@Test
+	void testCpt3() {
+		int nbCpt = CompteCourant.nbCompteCourant;
 		CompteCourant compteCourant3 = new CompteCourant();
 
 		compteCourant3.nom = "Quelqu\'un d\'autre";
@@ -63,13 +60,51 @@ class CompteCourantTest {
 		assertEquals("24554 521524 1558", compteCourant3.numero);
 		assertEquals(-40.32f, compteCourant3.solde);
 		assertEquals(50.0f, compteCourant3.montantDecouvertAutorise);
-		assertEquals(3, CompteCourant.nbCompteCourant);
+		assertEquals(nbCpt + 1, CompteCourant.nbCompteCourant);
+	}
 
+	@Test
+	void testCreditValues() {
+		CompteCourant compteCourant1 = new CompteCourant();
+		CompteCourant compteCourant2 = new CompteCourant();
+		CompteCourant compteCourant3 = new CompteCourant();
+
+		compteCourant1.solde = 1212.70f;
+		double soldeAnterieur = compteCourant1.solde;
+		compteCourant1.creditAccount(2.0f);
+		assertEquals((soldeAnterieur + 2.0f), compteCourant1.solde);
+		
+		compteCourant2.solde = 411.04f;
+		soldeAnterieur = compteCourant2.solde;
+		compteCourant2.creditAccount(5.0f);
+		assertEquals((soldeAnterieur + 5.0f), compteCourant2.solde);
+
+		compteCourant3.solde = 524825.21f;
 		soldeAnterieur = compteCourant3.solde;
 		compteCourant3.creditAccount(8.0f);
 		assertEquals((soldeAnterieur + 8.0f), compteCourant3.solde);
+	}
+	
+	@Test
+	void testDebitValues() {
+		CompteCourant compteCourant1 = new CompteCourant();
+		CompteCourant compteCourant2 = new CompteCourant();
+		CompteCourant compteCourant3 = new CompteCourant();
+
+		compteCourant1.solde = 1242.71f;
+		double soldeAnterieur = compteCourant1.solde;
+		compteCourant1.debitAccount(12.0f);
+		assertEquals((soldeAnterieur - 12.0f), compteCourant1.solde);
+		
+		compteCourant2.solde = 411.04f;
+		soldeAnterieur = compteCourant2.solde;
+		compteCourant2.debitAccount(15.0f);
+		assertEquals((soldeAnterieur - 15.0f), compteCourant2.solde);
+
+		compteCourant3.solde = 524825.21f;
+		soldeAnterieur = compteCourant3.solde;
 		compteCourant3.debitAccount(18.0f);
-		assertEquals((soldeAnterieur + 8.0f - 18.0f), compteCourant3.solde);
+		assertEquals((soldeAnterieur - 18.0f), compteCourant3.solde);
 	}
 
 }
