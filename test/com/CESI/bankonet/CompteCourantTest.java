@@ -23,7 +23,8 @@ class CompteCourantTest {
 		assertEquals(150.0f, compteCourant1.montantDecouvertAutorise);
 		assertEquals(1, CompteCourant.nbCompteCourant);
 		
-		addAmount(5f, compteCourant1);
+		creditAccount(2f, compteCourant1);
+		debitAccount(12f, compteCourant1);
 
 		CompteCourant compteCourant2 = new CompteCourant();
 		
@@ -40,7 +41,8 @@ class CompteCourantTest {
 		assertEquals(0.0f, compteCourant2.montantDecouvertAutorise);
 		assertEquals(2, CompteCourant.nbCompteCourant);
 
-		addAmount(5f, compteCourant2);
+		creditAccount(5f, compteCourant2);
+		debitAccount(15f, compteCourant2);
 
 		CompteCourant compteCourant3 = new CompteCourant();
 
@@ -57,12 +59,20 @@ class CompteCourantTest {
 		assertEquals(50.0f, compteCourant3.montantDecouvertAutorise);
 		assertEquals(3, CompteCourant.nbCompteCourant);
 
-		addAmount(5f, compteCourant3);
+		creditAccount(8f, compteCourant3);
+		debitAccount(18f, compteCourant3);
 	}
 	
-	public void addAmount(double amount, CompteCourant compteCourant) {
+	public void creditAccount(double amount, CompteCourant compteCourant) {
 		double solde = compteCourant.solde;
 		solde += amount;
+		compteCourant.solde = solde;
+		assertEquals(compteCourant.solde, solde);
+	}
+	
+	public void debitAccount(double amount, CompteCourant compteCourant) {
+		double solde = compteCourant.solde;
+		solde -= amount;
 		compteCourant.solde = solde;
 		assertEquals(compteCourant.solde, solde);
 	}
