@@ -22,6 +22,8 @@ class CompteCourantTest {
 		assertEquals(120.22f, compteCourant1.solde);
 		assertEquals(150.0f, compteCourant1.montantDecouvertAutorise);
 		assertEquals(1, CompteCourant.nbCompteCourant);
+		
+		addAmount(5f, compteCourant1);
 
 		CompteCourant compteCourant2 = new CompteCourant();
 		
@@ -38,6 +40,8 @@ class CompteCourantTest {
 		assertEquals(0.0f, compteCourant2.montantDecouvertAutorise);
 		assertEquals(2, CompteCourant.nbCompteCourant);
 
+		addAmount(5f, compteCourant2);
+
 		CompteCourant compteCourant3 = new CompteCourant();
 
 		compteCourant3.nom = "Quelqu\'un d\'autre";
@@ -52,6 +56,15 @@ class CompteCourantTest {
 		assertEquals(-40.32f, compteCourant3.solde);
 		assertEquals(50.0f, compteCourant3.montantDecouvertAutorise);
 		assertEquals(3, CompteCourant.nbCompteCourant);
+
+		addAmount(5f, compteCourant3);
+	}
+	
+	public void addAmount(double amount, CompteCourant compteCourant) {
+		double solde = compteCourant.solde;
+		solde += amount;
+		compteCourant.solde = solde;
+		assertEquals(compteCourant.solde, solde);
 	}
 
 }
