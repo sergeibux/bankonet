@@ -30,13 +30,15 @@ public class CompteEpargne {
 			creditAccount(-amount);
 		} else {
 			double soldePrevisionnel = this.solde - amount;
-			if (soldePrevisionnel < -(this.tauxInteret)) {
+			if (soldePrevisionnel < 0) {
 				System.out.println("Le solde de votre compte (" + this.solde + ") ne vous permet pas d'effectuer cette opération.");
 			} else {
 				this.solde = soldePrevisionnel;
 			}
 		}
 	}
+	
+	
 	
 	@Override
 	public String toString() {
@@ -51,6 +53,10 @@ public class CompteEpargne {
 		
 		str += "\n________________________________________________________\n";
 		return str;
+	}
+	
+	public void calculerInterets() {
+		this.solde += this.solde * (this.tauxInteret / 100);
 	}
 
 	public String getNom() {

@@ -81,15 +81,15 @@ class CompteEpargneTest {
 	void testCreditValues() {
 		compteEpargne1.setSolde(1212.70);
 		compteEpargne1.creditAccount(2.0);
-		assertEquals((1214.70), compteEpargne1.getSolde(), 0.01);
+		assertEquals(1214.70, compteEpargne1.getSolde(), 0.01);
 		
 		compteEpargne2.setSolde(411.04);
 		compteEpargne2.creditAccount(5.0);
-		assertEquals((416.04), compteEpargne2.getSolde(), 0.01);
+		assertEquals(416.04, compteEpargne2.getSolde(), 0.01);
 
 		compteEpargne3.setSolde(524825.21);
 		compteEpargne3.creditAccount(8.0);
-		assertEquals((524833.21), compteEpargne3.getSolde(), 0.01);
+		assertEquals(524833.21, compteEpargne3.getSolde(), 0.01);
 	}
 	
 	@Test
@@ -114,15 +114,12 @@ class CompteEpargneTest {
 		assertEquals(1242.71, compteEpargne1.getSolde(), 0.01);
 		
 		compteEpargne2.setSolde(411.00);
-		compteEpargne2.setTauxInteret(150.0);
 		compteEpargne2.debitAccount(415.0);
-		assertEquals(-4.0, compteEpargne2.getSolde(), 0.01);
+		assertEquals(411.0, compteEpargne2.getSolde(), 0.01);
 
 		compteEpargne2.setSolde(411.04);
-		System.out.println(compteEpargne2.toString());
 		compteEpargne2.debitAccount(415.0);
-		System.out.println(compteEpargne2.toString());
-		assertEquals(-3.96, compteEpargne2.getSolde(), 0.01);
+		assertEquals(411.04, compteEpargne2.getSolde(), 0.01);
 
 		compteEpargne3.setSolde(4825.21);
 		compteEpargne3.debitAccount(598718.0);
@@ -136,7 +133,6 @@ class CompteEpargneTest {
 		assertEquals(0.0, compteEpargne1.getSolde(), 0.01);
 		
 		compteEpargne2.setSolde(411.00);
-		compteEpargne2.setTauxInteret(150.0);
 		compteEpargne2.debitAccount(0.0);
 		assertEquals(411.0, compteEpargne2.getSolde(), 0.01);
 	}
@@ -146,7 +142,6 @@ class CompteEpargneTest {
 		compteEpargne1.setSolde(-25.0);
 		compteEpargne1.debitAccount(52.0);
 		assertEquals(-25.0, compteEpargne1.getSolde(), 0.01);
-		
 		compteEpargne2.setSolde(411.00);
 		compteEpargne2.debitAccount(-210.0);
 		assertEquals(621.0, compteEpargne2.getSolde(), 0.01);
@@ -182,5 +177,75 @@ class CompteEpargneTest {
 	void testToString(){
 		System.out.println(compteEpargne1.toString());
 	}
+	
+	@Test
+	void testCalculInterets() {
+		compteEpargne1.setSolde(100.0);
+		compteEpargne1.setTauxInteret(2.5);;
+		compteEpargne1.calculerInterets();
+		assertEquals(102.5, compteEpargne1.getSolde());
 
+		compteEpargne2.setSolde(100.0);
+		compteEpargne2.setTauxInteret(0);;
+		compteEpargne2.calculerInterets();
+		assertEquals(100.0, compteEpargne2.getSolde());
+
+		compteEpargne3.setSolde(100.0);
+		compteEpargne3.setTauxInteret(0.25);;
+		compteEpargne3.calculerInterets();
+		assertEquals(100.25, compteEpargne3.getSolde());
+
+
+		compteEpargne2.setSolde(0.0);
+		compteEpargne2.setTauxInteret(0.0);;
+		compteEpargne2.calculerInterets();
+		assertEquals(0.0, compteEpargne2.getSolde());
+		
+		compteEpargne3.setSolde(0.0);
+		compteEpargne3.setTauxInteret(0.5);;
+		compteEpargne3.calculerInterets();
+		assertEquals(0.0, compteEpargne3.getSolde());
+	}
+	
+	@Test
+	void testCalculInteretsNulls() {
+		compteEpargne2.setSolde(100.0);
+		compteEpargne2.setTauxInteret(0);;
+		compteEpargne2.calculerInterets();
+		assertEquals(100.0, compteEpargne2.getSolde());
+
+		compteEpargne2.setSolde(0.0);
+		compteEpargne2.setTauxInteret(0.0);;
+		compteEpargne2.calculerInterets();
+		assertEquals(0.0, compteEpargne2.getSolde());
+		
+		compteEpargne3.setSolde(0.0);
+		compteEpargne3.setTauxInteret(0.5);;
+		compteEpargne3.calculerInterets();
+		assertEquals(0.0, compteEpargne3.getSolde());
+	}
+	
+	@Test
+	void testCalculSoldeNulls() {
+		compteEpargne1.setSolde(0.0);
+		compteEpargne1.setTauxInteret(0.5);;
+		compteEpargne1.calculerInterets();
+		assertEquals(0.0, compteEpargne1.getSolde());
+	}
+
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
