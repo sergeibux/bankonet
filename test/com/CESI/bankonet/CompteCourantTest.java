@@ -170,8 +170,11 @@ class CompteCourantTest {
 	@Test
 	void testCreditNullValues() {
 		compteCourant1.setSolde(0.0);
+		System.out.println("###" + compteCourant1.toString());
 		compteCourant1.creditAccount(52.0);
+		System.out.println(compteCourant1.toString());
 		assertEquals(52.0, compteCourant1.getSolde(), 0.01);
+		System.out.println(compteCourant1.toString());
 		
 		compteCourant2.setSolde(211.02);
 		compteCourant2.creditAccount(0.0);

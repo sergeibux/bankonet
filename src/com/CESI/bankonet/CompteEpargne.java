@@ -1,53 +1,28 @@
 package com.CESI.bankonet;
 
-public class CompteEpargne {
+public class CompteEpargne extends Compte {
 	private String nom;
-	private String numero;
-	private String intitule;
-	private double solde = 0.0f;
 	private double tauxInteret = 0.0f;
 	private static int nbCompteEpargne = 0;
 	
 	public CompteEpargne(double soldeInitial) {
-		if (soldeInitial < 0) {
-			this.solde = 0;
-			System.out.println("Votre solde est inférieur à 0 : impossible.\n\tInitialisation avec solde = 0\n\n");
-		}
-		this.solde = solde;
+		super.initSolde(soldeInitial);
 		++ CompteEpargne.nbCompteEpargne;
 	}
 	
 	public void creditAccount(double amount) {
-		if (amount < 0) {
-			debitAccount(-amount);
-		} else {
-			this.solde += amount;
-		}
+		super.creditAccount(amount, 0.0);
 	}
 	
 	public void debitAccount(double amount) {
-		if (amount < 0) {
-			creditAccount(-amount);
-		} else {
-			double soldePrevisionnel = this.solde - amount;
-			if (soldePrevisionnel < 0) {
-				System.out.println("Le solde de votre compte (" + this.solde + ") ne vous permet pas d'effectuer cette opération.");
-			} else {
-				this.solde = soldePrevisionnel;
-			}
-		}
+		super.debitAccount(amount, 0.0);
 	}
 	
 	
 	
 	@Override
 	public String toString() {
-		String str = "\n________________________________________________________";
-		
-		str = "Solde du commpte de ";
-		str += this.nom;
-		str += " (" + this.numero + ") :\n\t";
-		str += Math.ceil(this.solde*100)/100 + " €\n";
+		String str = super.toString();
 		str += "Taux d'intérêt : " + this.tauxInteret + "\n";
 		str += "\n\tIl y a " + CompteEpargne.nbCompteEpargne + " comptes courants enregistrés";
 		
@@ -59,11 +34,9 @@ public class CompteEpargne {
 	public boolean equals(Object obj) {
 		boolean bool = true;
 
-		if ((this.nom != ((CompteEpargne)obj).nom) || 
-				(this.numero != ((CompteEpargne)obj).numero) || 
-				(this.intitule != ((CompteEpargne)obj).intitule) ||
-				(this.solde != ((CompteEpargne)obj).solde) || 
-				(this.tauxInteret != ((CompteEpargne)obj).tauxInteret)) {
+		if ((!super.equals(obj)) || 
+				(this.nom != ((CompteEpargne)obj).getNom()) ||
+				(this.tauxInteret != ((CompteEpargne)obj).getTauxInteret())) {
 			bool = false;
 		}
 		
@@ -71,7 +44,7 @@ public class CompteEpargne {
 	}
 	
 	public void calculerInterets() {
-		this.solde += this.solde * (this.tauxInteret / 100);
+		super.setSolde(super.getSolde() + (super.getSolde() * (this.tauxInteret / 100)));
 	}
 
 	public String getNom() {
@@ -80,30 +53,6 @@ public class CompteEpargne {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getIntitule() {
-		return intitule;
-	}
-
-	public void setIntitule(String intitule) {
-		this.intitule = intitule;
-	}
-
-	public double getSolde() {
-		return solde;
-	}
-
-	public void setSolde(double solde) {
-		this.solde = solde;
 	}
 
 	public double getTauxInteret() {
@@ -116,9 +65,5 @@ public class CompteEpargne {
 
 	public static int getNbCompteEpargne() {
 		return nbCompteEpargne;
-	}
-
-	public static void setNbCompteEpargne(int nbCompteCourant) {
-		CompteEpargne.nbCompteEpargne = nbCompteCourant;
 	}
 }

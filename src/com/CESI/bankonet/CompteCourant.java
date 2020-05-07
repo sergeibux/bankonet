@@ -1,51 +1,27 @@
 package com.CESI.bankonet;
 
-public class CompteCourant {
+public class CompteCourant extends Compte {
 	private String nom;
-	private String numero;
-	private String intitule;
-	private double solde = 0.0f;
 	private double montantDecouvertAutorise = 0.0f;
 	private static int nbCompteCourant = 0;
 	
 	public CompteCourant(double soldeInitial) {
-		if (soldeInitial < 0) {
-			this.solde = 0;
-			System.out.println("Votre solde est inférieur à 0 : impossible.\n\tInitialisation avec solde = 0\n\n");
-		}
-		this.solde = solde;
+		super.initSolde(soldeInitial);
 		++ CompteCourant.nbCompteCourant;
 	}
 	
 	public void creditAccount(double amount) {
-		if (amount < 0) {
-			debitAccount(-amount);
-		} else {
-			this.solde += amount;
-		}
+		System.out.println("cour");
+		super.creditAccount(amount, -(this.montantDecouvertAutorise));
 	}
 	
 	public void debitAccount(double amount) {
-		if (amount < 0) {
-			creditAccount(-amount);
-		} else {
-			double soldePrevisionnel = this.solde - amount;
-			if (soldePrevisionnel < -(this.montantDecouvertAutorise)) {
-				System.out.println("Le solde de votre compte (" + this.solde + ") ne vous permet pas d'effectuer cette opération.");
-			} else {
-				this.solde = soldePrevisionnel;
-			}
-		}
+		super.debitAccount(amount, -(this.montantDecouvertAutorise));
 	}
 	
 	@Override
 	public String toString() {
-		String str = "\n________________________________________________________";
-		
-		str = "Solde du commpte de ";
-		str += this.nom;
-		str += " (" + this.numero + ") :\n\t";
-		str += Math.ceil(this.solde*100)/100 + " €\n";
+		String str = super.toString();
 		str += "Découvert autorisé : " + this.montantDecouvertAutorise + "\n";
 		str += "\n\tIl y a " + CompteCourant.nbCompteCourant + " comptes courants enregistrés";
 		
@@ -57,10 +33,8 @@ public class CompteCourant {
 	public boolean equals(Object obj) {
 		boolean bool = true;
 
-		if ((this.nom != ((CompteCourant)obj).nom) ||
-				(this.numero != ((CompteCourant)obj).numero) ||
-				(this.intitule != ((CompteCourant)obj).intitule) ||
-				(this.solde != ((CompteCourant)obj).solde) ||
+		if ((!super.equals(obj)) ||
+				(this.nom != ((CompteCourant)obj).getNom()) ||
 				(this.montantDecouvertAutorise != ((CompteCourant)obj).montantDecouvertAutorise)){
 			bool= false;
 		}
@@ -76,30 +50,6 @@ public class CompteCourant {
 		this.nom = nom;
 	}
 
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getIntitule() {
-		return intitule;
-	}
-
-	public void setIntitule(String intitule) {
-		this.intitule = intitule;
-	}
-
-	public double getSolde() {
-		return solde;
-	}
-
-	public void setSolde(double solde) {
-		this.solde = solde;
-	}
-
 	public double getMontantDecouvertAutorise() {
 		return montantDecouvertAutorise;
 	}
@@ -110,9 +60,5 @@ public class CompteCourant {
 
 	public static int getNbCompteCourant() {
 		return nbCompteCourant;
-	}
-
-	public static void setNbCompteCourant(int nbCompteCourant) {
-		CompteCourant.nbCompteCourant = nbCompteCourant;
 	}
 }
