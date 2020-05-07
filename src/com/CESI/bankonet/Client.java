@@ -24,6 +24,7 @@ public class Client {
 	public double calculerAvoirGlobal() {
 		double avoir = 0.0;
 		
+		
 		return avoir;
 	}
 	

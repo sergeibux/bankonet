@@ -40,33 +40,15 @@ class ClientTest {
 		clientSansCpt = new Client("Madame", "Dou Naute Douwite", "CZ145SZ4210", null, null);
 	}
 	
-	@BeforeEach
-	void decouvertNull() {
+	@BeforeAll
+	static void decouvertNull() {
 		compteCourant1.setMontantDecouvertAutorise(0.0);
 		compteCourant2.setMontantDecouvertAutorise(0.0);
 		compteCourant3.setMontantDecouvertAutorise(0.0);
 	}
 	
-	@Test
-	void testConstructors() {
-		assertEquals("Monsieur", clientDeuxCpt.getNom());
-		assertEquals("Chanceux", clientDeuxCpt.getPrenom());
-		assertEquals("G41FSGS52", clientDeuxCpt.getIdentifiant());
-		
-		assertEquals("Miss", clientCourantUniquement.getNom());
-		assertEquals("Boule de Gomme", clientCourantUniquement.getPrenom());
-		assertEquals("FR424242BE", clientCourantUniquement.getIdentifiant());
-
-		assertEquals("Mister", clientEpargneUniquement.getNom());
-		assertEquals("Mystère", clientEpargneUniquement.getPrenom());
-		assertEquals("BE3145241", clientEpargneUniquement.getIdentifiant());
-
-		assertEquals("Madame", clientSansCpt.getNom());
-		assertEquals("Dou Naute Douwite", clientSansCpt.getPrenom());
-		assertEquals("CZ145SZ4210", clientSansCpt.getIdentifiant());
-	}
-	
-	@Test void testGiveAccounts() {
+	@BeforeAll
+	static void testGiveAccounts() {
 		clientDeuxCpt.setCompteCourant(compteCourant1);
 		clientDeuxCpt.setCompteEpargne(compteEpargne1);
 
@@ -86,10 +68,59 @@ class ClientTest {
 		assertEquals(null, clientSansCpt.getCompteCourant());
 		assertEquals(null, clientSansCpt.getCompteEpargne());
 	}
-
+	
 	@Test
 	public void testnbClient() {
 		assertEquals(3, CompteCourant.getNbCompteCourant(), 0);
+	}
+	
+	@Test
+	void testConstructors() {
+		assertEquals("Monsieur", clientDeuxCpt.getNom());
+		assertEquals("Chanceux", clientDeuxCpt.getPrenom());
+		assertEquals("G41FSGS52", clientDeuxCpt.getIdentifiant());
+		
+		assertEquals("Miss", clientCourantUniquement.getNom());
+		assertEquals("Boule de Gomme", clientCourantUniquement.getPrenom());
+		assertEquals("FR424242BE", clientCourantUniquement.getIdentifiant());
+		
+		assertEquals("Mister", clientEpargneUniquement.getNom());
+		assertEquals("Mystère", clientEpargneUniquement.getPrenom());
+		assertEquals("BE3145241", clientEpargneUniquement.getIdentifiant());
+		
+		assertEquals("Madame", clientSansCpt.getNom());
+		assertEquals("Dou Naute Douwite", clientSansCpt.getPrenom());
+		assertEquals("CZ145SZ4210", clientSansCpt.getIdentifiant());
+	}
+	
+	@Test
+	void testModifyAccountData_Courant() {
+		clientDeuxCpt.getCompteCourant().setNom("Hacker");
+		clientDeuxCpt.getCompteCourant().setNumero("H0077");
+		clientDeuxCpt.getCompteCourant().setIntitule("Bad Guy");
+		clientDeuxCpt.getCompteCourant().setSolde(5034.04);
+		clientDeuxCpt.getCompteCourant().setMontantDecouvertAutorise(12.0);
+
+		assertEquals("Hacker", clientDeuxCpt.getCompteCourant().getNom());
+		assertEquals("H0077", clientDeuxCpt.getCompteCourant().getNumero());
+		assertEquals("Bad Guy", clientDeuxCpt.getCompteCourant().getIntitule());
+		assertEquals(5034.04, clientDeuxCpt.getCompteCourant().getSolde());
+		assertEquals(12.0, clientDeuxCpt.getCompteCourant().getMontantDecouvertAutorise());
+	}
+
+	@Test
+	void testModifyAccountData_Epargne() {
+		clientDeuxCpt.getCompteEpargne().setNom("Pi");
+		clientDeuxCpt.getCompteEpargne().setNumero("3.14etc");;
+		clientDeuxCpt.getCompteEpargne().setIntitule("Csou");
+		clientDeuxCpt.getCompteEpargne().setSolde(1000000.01);
+		clientDeuxCpt.getCompteEpargne().setTauxInteret(0.01);
+
+		assertEquals("Pi", clientDeuxCpt.getCompteEpargne().getNom());
+		assertEquals("3.14etc", clientDeuxCpt.getCompteEpargne().getNumero());
+		assertEquals("Csou", clientDeuxCpt.getCompteEpargne().getIntitule());
+		assertEquals(1000000.01, clientDeuxCpt.getCompteEpargne().getSolde());
+		assertEquals(0.01, clientDeuxCpt.getCompteEpargne().getTauxInteret());
 	}
 
 	
