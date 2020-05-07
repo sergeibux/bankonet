@@ -123,6 +123,45 @@ class ClientTest {
 		assertEquals(0.01, clientDeuxCpt.getCompteEpargne().getTauxInteret());
 	}
 
+	@Test
+	void testAvoir(){
+		clientDeuxCpt.getCompteCourant().setSolde(25.0);
+		clientDeuxCpt.getCompteEpargne().setSolde(36.0);
+		
+		assertEquals(61.0, clientDeuxCpt.calculerAvoirGlobal());
+	}
+
+	@Test
+	void testAvoir_courantNegatif(){
+		clientDeuxCpt.getCompteCourant().setSolde(-25.0);
+		clientDeuxCpt.getCompteEpargne().setSolde(36.0);
+		
+		assertEquals(11.0, clientDeuxCpt.calculerAvoirGlobal());
+	}
+
+	@Test
+	void testAvoir_courantNull(){
+		clientDeuxCpt.getCompteCourant().setSolde(0.0);
+		clientDeuxCpt.getCompteEpargne().setSolde(36.0);
+		
+		assertEquals(36.0, clientDeuxCpt.calculerAvoirGlobal());
+	}
+
+	@Test
+	void testAvoir_epargneNull(){
+		clientDeuxCpt.getCompteCourant().setSolde(25.0);
+		clientDeuxCpt.getCompteEpargne().setSolde(0.0);
+		
+		assertEquals(25.0, clientDeuxCpt.calculerAvoirGlobal());
+	}
+
+	@Test
+	void testAvoir_bothNull(){
+		clientDeuxCpt.getCompteCourant().setSolde(0.0);
+		clientDeuxCpt.getCompteEpargne().setSolde(0.0);
+		
+		assertEquals(0.0, clientDeuxCpt.calculerAvoirGlobal());
+	}
 	
 	@Test
 	void testToString(){

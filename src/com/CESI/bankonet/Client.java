@@ -24,6 +24,8 @@ public class Client {
 	public double calculerAvoirGlobal() {
 		double avoir = 0.0;
 		
+		avoir += this.compteCourant.getSolde();
+		avoir += this.compteEpargne.getSolde();
 		
 		return avoir;
 	}
