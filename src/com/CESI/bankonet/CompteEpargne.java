@@ -1,20 +1,20 @@
 package com.CESI.bankonet;
 
-public class CompteCourant {
+public class CompteEpargne {
 	private String nom;
 	private String numero;
 	private String intitule;
 	private double solde = 0.0f;
-	private double montantDecouvertAutorise = 0.0f;
-	private static int nbCompteCourant = 0;
+	private double tauxInteret = 0.0f;
+	private static int nbCompteEpargne = 0;
 	
-	public CompteCourant(double soldeInitial) {
+	public CompteEpargne(double soldeInitial) {
 		if (soldeInitial < 0) {
 			this.solde = 0;
 			System.out.println("Votre solde est inférieur à 0 : impossible.\n\tInitialisation avec solde = 0\n\n");
 		}
 		this.solde = solde;
-		++ CompteCourant.nbCompteCourant;
+		++ CompteEpargne.nbCompteEpargne;
 	}
 	
 	public void creditAccount(double amount) {
@@ -30,7 +30,7 @@ public class CompteCourant {
 			creditAccount(-amount);
 		} else {
 			double soldePrevisionnel = this.solde - amount;
-			if (soldePrevisionnel < -(this.montantDecouvertAutorise)) {
+			if (soldePrevisionnel < -(this.tauxInteret)) {
 				System.out.println("Le solde de votre compte (" + this.solde + ") ne vous permet pas d'effectuer cette opération.");
 			} else {
 				this.solde = soldePrevisionnel;
@@ -46,8 +46,8 @@ public class CompteCourant {
 		str += this.nom;
 		str += " (" + this.numero + ") :\n\t";
 		str += Math.ceil(this.solde*100)/100 + " €\n";
-		str += "Découvert autorisé : " + this.montantDecouvertAutorise + "\n";
-		str += "\n\tIl y a " + CompteCourant.nbCompteCourant + " comptes courants enregistrés";
+		str += "Taux d'intérêt : " + this.tauxInteret + "\n";
+		str += "\n\tIl y a " + CompteEpargne.nbCompteEpargne + " comptes courants enregistrés";
 		
 		str += "\n________________________________________________________\n";
 		return str;
@@ -85,19 +85,19 @@ public class CompteCourant {
 		this.solde = solde;
 	}
 
-	public double getMontantDecouvertAutorise() {
-		return montantDecouvertAutorise;
+	public double getTauxInteret() {
+		return tauxInteret;
 	}
 
-	public void setMontantDecouvertAutorise(double montantDecouvertAutorise) {
-		this.montantDecouvertAutorise = montantDecouvertAutorise;
+	public void setTauxInteret(double tauxInteret) {
+		this.tauxInteret = tauxInteret;
 	}
 
-	public static int getNbCompteCourant() {
-		return nbCompteCourant;
+	public static int getNbCompteEpargne() {
+		return nbCompteEpargne;
 	}
 
-	public static void setNbCompteCourant(int nbCompteCourant) {
-		CompteCourant.nbCompteCourant = nbCompteCourant;
+	public static void setNbCompteEpargne(int nbCompteCourant) {
+		CompteEpargne.nbCompteEpargne = nbCompteCourant;
 	}
 }
