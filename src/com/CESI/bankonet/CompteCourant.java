@@ -52,6 +52,21 @@ public class CompteCourant {
 		str += "\n________________________________________________________\n";
 		return str;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean bool = true;
+
+		if ((this.nom != ((CompteCourant)obj).nom) ||
+				(this.numero != ((CompteCourant)obj).numero) ||
+				(this.intitule != ((CompteCourant)obj).intitule) ||
+				(this.solde != ((CompteCourant)obj).solde) ||
+				(this.montantDecouvertAutorise != ((CompteCourant)obj).montantDecouvertAutorise)){
+			bool= false;
+		}
+		
+		return bool;
+	}
 
 	public String getNom() {
 		return nom;

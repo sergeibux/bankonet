@@ -226,6 +226,131 @@ class CompteEpargneTest {
 	}
 	
 	@Test
+	void testEquality_Name() {
+		compteEpargne1.setNom("Nelson Mandela");
+		compteEpargne1.setNumero("Fighty for equality");
+		compteEpargne1.setIntitule("Stand up for your rights");
+		compteEpargne1.setSolde(42.0);
+		compteEpargne1.setTauxInteret(100.0);
+		
+		compteEpargne2.setNom("Nelson Mandela");
+		compteEpargne2.setNumero("Fighty for equality");
+		compteEpargne2.setIntitule("Stand up for your rights");
+		compteEpargne2.setSolde(42.0);
+		compteEpargne2.setTauxInteret(100.0);
+		
+		compteEpargne3.setNom("Rosa Parks");
+		compteEpargne3.setNumero("Fighty for equality");
+		compteEpargne3.setIntitule("Stand up for your rights");
+		compteEpargne3.setSolde(42.0);
+		compteEpargne3.setTauxInteret(100.0);
+
+		assertEquals(true, compteEpargne1.equals(compteEpargne2));
+		assertEquals(false, compteEpargne1.equals(compteEpargne3));
+		assertEquals(false, compteEpargne2.equals(compteEpargne3));
+	}
+	
+	@Test
+	void testEquality_Number() {
+		compteEpargne1.setNom("Nelson Mandela");
+		compteEpargne1.setNumero("Fighty for equality");
+		compteEpargne1.setIntitule("Stand up for your rights");
+		compteEpargne1.setSolde(42.0);
+		compteEpargne1.setTauxInteret(100.0);
+		
+		compteEpargne2.setNom("Nelson Mandela");
+		compteEpargne2.setNumero("Fighty for equality");
+		compteEpargne2.setIntitule("Stand up for your rights");
+		compteEpargne2.setSolde(42.0);
+		compteEpargne2.setTauxInteret(100.0);
+		
+		compteEpargne3.setNom("Nelson Mandela");
+		compteEpargne3.setNumero("Fighty for freedom");
+		compteEpargne3.setIntitule("Stand up for your rights");
+		compteEpargne3.setSolde(42.0);
+		compteEpargne3.setTauxInteret(100.0);
+
+		assertEquals(true, compteEpargne1.equals(compteEpargne2));
+		assertEquals(false, compteEpargne1.equals(compteEpargne3));
+		assertEquals(false, compteEpargne2.equals(compteEpargne3));
+	}
+	
+	@Test
+	void testEquality_Reference() {
+		compteEpargne1.setNom("Nelson Mandela");
+		compteEpargne1.setNumero("Fighty for equality");
+		compteEpargne1.setIntitule("Stand up for your rights");
+		compteEpargne1.setSolde(42.0);
+		compteEpargne1.setTauxInteret(100.0);
+		
+		compteEpargne2.setNom("Nelson Mandela");
+		compteEpargne2.setNumero("Fighty for equality");
+		compteEpargne2.setIntitule("Stand up for your rights");
+		compteEpargne2.setSolde(42.0);
+		compteEpargne2.setTauxInteret(100.0);
+		
+		compteEpargne3.setNom("Nelson Mandela");
+		compteEpargne3.setNumero("Fighty for equality");
+		compteEpargne3.setIntitule("Stand up for your spot");
+		compteEpargne3.setSolde(42.0);
+		compteEpargne3.setTauxInteret(100.0);
+
+		assertEquals(true, compteEpargne1.equals(compteEpargne2));
+		assertEquals(false, compteEpargne1.equals(compteEpargne3));
+		assertEquals(false, compteEpargne2.equals(compteEpargne3));
+	}
+	
+	@Test
+	void testEquality_Solde() {
+		compteEpargne1.setNom("Nelson Mandela");
+		compteEpargne1.setNumero("Fighty for equality");
+		compteEpargne1.setIntitule("Stand up for your rights");
+		compteEpargne1.setSolde(42.0);
+		compteEpargne1.setTauxInteret(100.0);
+		
+		compteEpargne2.setNom("Nelson Mandela");
+		compteEpargne2.setNumero("Fighty for equality");
+		compteEpargne2.setIntitule("Stand up for your rights");
+		compteEpargne2.setSolde(42.0);
+		compteEpargne2.setTauxInteret(100.0);
+		
+		compteEpargne3.setNom("Nelson Mandela");
+		compteEpargne3.setNumero("Fighty for equality");
+		compteEpargne3.setIntitule("Stand up for your rights");
+		compteEpargne3.setSolde(42.42);
+		compteEpargne3.setTauxInteret(100.0);
+
+		assertEquals(true, compteEpargne1.equals(compteEpargne2));
+		assertEquals(false, compteEpargne1.equals(compteEpargne3));
+		assertEquals(false, compteEpargne2.equals(compteEpargne3));
+	}
+	
+	@Test
+	void testEquality_Taux() {
+		compteEpargne1.setNom("Nelson Mandela");
+		compteEpargne1.setNumero("Fighty for equality");
+		compteEpargne1.setIntitule("Stand up for your rights");
+		compteEpargne1.setSolde(42.0);
+		compteEpargne1.setTauxInteret(100.0);
+		
+		compteEpargne2.setNom("Nelson Mandela");
+		compteEpargne2.setNumero("Fighty for equality");
+		compteEpargne2.setIntitule("Stand up for your rights");
+		compteEpargne2.setSolde(42.0);
+		compteEpargne2.setTauxInteret(100.0);
+		
+		compteEpargne3.setNom("Nelson Mandela");
+		compteEpargne3.setNumero("Fighty for equality");
+		compteEpargne3.setIntitule("Stand up for your rights");
+		compteEpargne3.setSolde(42.0);
+		compteEpargne3.setTauxInteret(99.99);
+
+		assertEquals(true, compteEpargne1.equals(compteEpargne2));
+		assertEquals(false, compteEpargne1.equals(compteEpargne3));
+		assertEquals(false, compteEpargne2.equals(compteEpargne3));
+	}
+	
+	@Test
 	void testCalculSoldeNulls() {
 		compteEpargne1.setSolde(0.0);
 		compteEpargne1.setTauxInteret(0.5);;

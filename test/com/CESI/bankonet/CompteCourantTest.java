@@ -182,5 +182,29 @@ class CompteCourantTest {
 	void testToString(){
 		System.out.println(compteCourant1.toString());
 	}
+	
+	@Test
+	void testEquality() {
+		compteCourant1.setNom("Nelson Mandela");
+		compteCourant1.setNumero("Fighty for equality");
+		compteCourant1.setIntitule("Stand up for your rights");
+		compteCourant1.setSolde(42.0);
+		compteCourant1.setMontantDecouvertAutorise(99999999.0);
+		
+		compteCourant2.setNom("Nelson Mandela");
+		compteCourant2.setNumero("Fighty for equality");
+		compteCourant2.setIntitule("Stand up for your rights");
+		compteCourant2.setSolde(42.0);
+		compteCourant2.setMontantDecouvertAutorise(99999999.0);
+		
+		compteCourant3.setNom("Rosa Parks");
+		compteCourant3.setNumero("Fighty for equality");
+		compteCourant3.setIntitule("Stand up for your rights");
+		compteCourant3.setSolde(42.0);
+		compteCourant3.setMontantDecouvertAutorise(99999999.0);
 
+		assertEquals(true, compteCourant1.equals(compteCourant2));
+		assertEquals(false, compteCourant1.equals(compteCourant3));
+		assertEquals(false, compteCourant2.equals(compteCourant3));
+	}
 }

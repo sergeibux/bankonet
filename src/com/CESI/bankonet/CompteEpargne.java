@@ -55,6 +55,21 @@ public class CompteEpargne {
 		return str;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		boolean bool = true;
+
+		if ((this.nom != ((CompteEpargne)obj).nom) || 
+				(this.numero != ((CompteEpargne)obj).numero) || 
+				(this.intitule != ((CompteEpargne)obj).intitule) ||
+				(this.solde != ((CompteEpargne)obj).solde) || 
+				(this.tauxInteret != ((CompteEpargne)obj).tauxInteret)) {
+			bool = false;
+		}
+		
+		return bool;
+	}
+	
 	public void calculerInterets() {
 		this.solde += this.solde * (this.tauxInteret / 100);
 	}
